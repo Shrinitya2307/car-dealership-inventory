@@ -1,0 +1,739 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Car Dealership</title>
+
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            🚗 CarDealership
+        </div>
+
+        <button class="nav-btn active"
+                onclick="showDashboard()">
+            🏠 Dashboard
+        </button>
+
+        <button class="nav-btn"
+                onclick="showCars()">
+            🚗 Cars
+        </button>
+
+        <button class="nav-btn"
+                onclick="showCustomers()">
+            👥 Customers
+        </button>
+
+        <button class="nav-btn"
+                onclick="showEnquiries()">
+            📩 Enquiries
+        </button>
+
+        <button class="nav-btn"
+                onclick="showSettings()">
+            ⚙️ Settings
+        </button>
+
+        <button class="logout-btn"
+                onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOP BAR ================= -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Manage your car dealership
+                </p>
+
+            </div>
+
+            <div class="admin-name">
+                👨‍💼 <span id="adminDisplayName">Admin</span>
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section
+            id="dashboardSection"
+            class="dashboard-section">
+
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🚗
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Total Cars
+                        </h3>
+
+                        <p id="totalCars">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Available Cars
+                        </h3>
+
+                        <p id="availableCars">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Customers
+                        </h3>
+
+                        <p id="totalCustomers">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📩
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Enquiries
+                        </h3>
+
+                        <p id="totalEnquiries">
+                            0
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <div class="welcome-box">
+
+                <h2>
+                    Welcome to Admin Dashboard 👋
+                </h2>
+
+                <p>
+                    Use the menu on the left to manage
+                    cars, customers and enquiries.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CARS ================= -->
+
+        <section
+            id="carsSection"
+            class="cars-section"
+            style="display:none;">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        🚗 Car Inventory
+                    </h2>
+
+                    <p>
+                        Manage dealership vehicles
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-car-btn"
+                    onclick="addCar()">
+
+                    + Add New Car
+
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchCar"
+                    placeholder="🔍 Search cars..."
+                    onkeyup="searchCars()">
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Make</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Price</th>
+                            <th>Color</th>
+                            <th>Mileage</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="carsTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CUSTOMERS ================= -->
+
+        <section
+            id="customersSection"
+            class="customers-section"
+            style="display:none;">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        👥 Registered Customers
+                    </h2>
+
+                    <p>
+                        View customers registered
+                        with the dealership
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="customersTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ENQUIRIES ================= -->
+
+        <section
+            id="enquiriesSection"
+            class="enquiries-section"
+            style="display:none;">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        📩 Customer Enquiries
+                    </h2>
+
+                    <p>
+                        View enquiries submitted
+                        by customers
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Car</th>
+                            <th>Message</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="enquiriesTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SETTINGS ================= -->
+
+        <section
+            id="settingsSection"
+            class="settings-section"
+            style="display:none;">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        ⚙️ Settings
+                    </h2>
+
+                    <p>
+                        Manage your admin account
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ADMIN PROFILE -->
+
+            <div class="settings-card">
+
+                <h3>
+                    👤 Admin Profile
+                </h3>
+
+                <p>
+                    Username:
+                    <strong id="settingsUsername">
+                        Admin
+                    </strong>
+                </p>
+
+            </div>
+
+
+            <!-- CHANGE PASSWORD -->
+
+            <div class="settings-card">
+
+                <h3>
+                    🔐 Change Password
+                </h3>
+
+
+                <form id="changePasswordForm">
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        placeholder="Current Password"
+                        required>
+
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="New Password"
+                        required>
+
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm New Password"
+                        required>
+
+
+                    <button
+                        type="submit"
+                        class="save-car-btn">
+
+                        Change Password
+
+                    </button>
+
+                </form>
+
+
+                <p id="passwordMessage"></p>
+
+            </div>
+
+
+            <!-- SYSTEM INFORMATION -->
+
+            <div class="settings-card">
+
+                <h3>
+                    ℹ️ System Information
+                </h3>
+
+                <p>
+                    <strong>
+                        Application:
+                    </strong>
+                    Car Dealership Inventory System
+                </p>
+
+                <p>
+                    <strong>
+                        Backend:
+                    </strong>
+                    Node.js + Express
+                </p>
+
+                <p>
+                    <strong>
+                        Database:
+                    </strong>
+                    PostgreSQL
+                </p>
+
+                <p>
+                    <strong>
+                        Server:
+                    </strong>
+                    http://127.0.0.1:5000
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= ADD CAR MODAL ================= -->
+
+<div
+    id="addCarModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeAddCar()">
+
+            &times;
+
+        </span>
+
+
+        <h2>
+            Add New Car
+        </h2>
+
+
+        <form id="addCarForm">
+
+            <input
+                type="text"
+                id="make"
+                placeholder="Make"
+                required>
+
+
+            <input
+                type="text"
+                id="model"
+                placeholder="Model"
+                required>
+
+
+            <input
+                type="number"
+                id="year"
+                placeholder="Year"
+                required>
+
+
+            <input
+                type="number"
+                id="price"
+                placeholder="Price"
+                required>
+
+
+            <input
+                type="text"
+                id="color"
+                placeholder="Color"
+                required>
+
+
+            <input
+                type="number"
+                id="mileage"
+                placeholder="Mileage"
+                required>
+
+
+            <select id="status">
+
+                <option value="Available">
+                    Available
+                </option>
+
+                <option value="Sold">
+                    Sold
+                </option>
+
+                <option value="Reserved">
+                    Reserved
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="save-car-btn">
+
+                Add Car
+
+            </button>
+
+        </form>
+
+
+        <p id="addCarMessage"></p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= EDIT CAR MODAL ================= -->
+
+<div
+    id="editCarModal"
+    class="modal">
+
+    <div class="modal-content">
+
+        <span
+            class="close"
+            onclick="closeEditCar()">
+
+            &times;
+
+        </span>
+
+
+        <h2>
+            Edit Car
+        </h2>
+
+
+        <form id="editCarForm">
+
+            <input
+                type="hidden"
+                id="editId">
+
+
+            <input
+                type="text"
+                id="editMake"
+                placeholder="Make"
+                required>
+
+
+            <input
+                type="text"
+                id="editModel"
+                placeholder="Model"
+                required>
+
+
+            <input
+                type="number"
+                id="editYear"
+                placeholder="Year"
+                required>
+
+
+            <input
+                type="number"
+                id="editPrice"
+                placeholder="Price"
+                required>
+
+
+            <input
+                type="text"
+                id="editColor"
+                placeholder="Color"
+                required>
+
+
+            <input
+                type="number"
+                id="editMileage"
+                placeholder="Mileage"
+                required>
+
+
+            <select id="editStatus">
+
+                <option value="Available">
+                    Available
+                </option>
+
+                <option value="Sold">
+                    Sold
+                </option>
+
+                <option value="Reserved">
+                    Reserved
+                </option>
+
+            </select>
+
+
+            <button
+                type="submit"
+                class="save-car-btn">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
+
+        <p id="editCarMessage"></p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="admin-dashboard.js"></script>
+
+</body>
+
+</html>
+```

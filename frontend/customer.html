@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car Dealership</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🚗 Car Dealership</h1>
+
+    <p>Find your perfect car</p>
+
+    <!-- Search -->
+    <input
+        type="text"
+        id="search"
+        placeholder="Search by make or model"
+    >
+
+    <!-- Price Filter -->
+    <input
+        type="number"
+        id="max-price"
+        placeholder="Maximum price"
+    >
+
+    <!-- Year Filter -->
+    <input
+        type="number"
+        id="min-year"
+        placeholder="Minimum year"
+    >
+
+    <button onclick="loadAvailableCars()">
+        Search
+    </button>
+
+    <button onclick="clearFilters()">
+        Clear Filters
+    </button>
+
+    <hr>
+
+    <div id="cars-container"></div>
+
+    <script src="customer.js"></script>
+
+</body>
+
+</html>

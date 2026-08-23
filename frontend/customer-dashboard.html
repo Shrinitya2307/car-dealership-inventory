@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Dashboard - Car Dealership</title>
+
+    <link rel="stylesheet" href="customer-dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                🚗 CarDealership
+            </div>
+
+
+            <button
+                class="nav-btn active"
+                onclick="showDashboard()">
+
+                🏠 Dashboard
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showCars()">
+
+                🚗 Browse Cars
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showMyEnquiries()">
+
+                📩 My Enquiries
+
+            </button>
+
+
+            <button
+                class="nav-btn"
+                onclick="showProfile()">
+
+                👤 My Profile
+
+            </button>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                🚪 Logout
+
+            </button>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h1>
+                        Customer Dashboard
+                    </h1>
+
+                    <p>
+                        Welcome to CarDealership
+                    </p>
+
+                </div>
+
+
+                <div class="customer-name">
+
+                    👤
+                    <span id="customerName">
+                        Customer
+                    </span>
+
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD HOME -->
+
+            <section
+                id="dashboardSection"
+                class="dashboard-section">
+
+                <h2>
+                    Welcome Back! 👋
+                </h2>
+
+                <p>
+                    Find your perfect car
+                    from our collection.
+                </p>
+
+
+                <div class="customer-stats">
+
+
+                    <div class="customer-card">
+
+                        <div class="card-icon">
+                            🚗
+                        </div>
+
+                        <h3>
+                            Available Cars
+                        </h3>
+
+                        <p id="availableCars">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="customer-card">
+
+                        <div class="card-icon">
+                            📩
+                        </div>
+
+                        <h3>
+                            My Enquiries
+                        </h3>
+
+                        <p id="myEnquiryCount">
+                            0
+                        </p>
+
+                    </div>
+
+
+                    <div class="customer-card">
+
+                        <div class="card-icon">
+                            👤
+                        </div>
+
+                        <h3>
+                            My Profile
+                        </h3>
+
+                        <button
+                            onclick="showProfile()">
+
+                            View Profile
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CARS SECTION -->
+
+            <section
+                id="carsSection"
+                class="cars-section"
+                style="display:none;">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Browse Cars
+                        </h2>
+
+                        <p>
+                            Find your perfect car
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="searchCar"
+                        placeholder="🔍 Search by make or model..."
+                        onkeyup="searchCars()"
+                    >
+
+                </div>
+
+
+                <!-- CARS -->
+
+                <div
+                    id="carsContainer"
+                    class="cars-container">
+
+                </div>
+
+            </section>
+
+
+            <!-- MY ENQUIRIES -->
+
+            <section
+                id="myEnquiriesSection"
+                class="enquiries-section"
+                style="display:none;">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            My Enquiries
+                        </h2>
+
+                        <p>
+                            Enquiries you have submitted
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Car</th>
+                                <th>Message</th>
+                                <th>Date</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="myEnquiriesTable">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE -->
+
+            <section
+                id="profileSection"
+                class="profile-section"
+                style="display:none;">
+
+                <div class="profile-card">
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+
+                    <div class="profile-info">
+
+                        <p>
+                            <strong>Name:</strong>
+
+                            <span id="profileName">
+                            </span>
+                        </p>
+
+
+                        <p>
+                            <strong>Username:</strong>
+
+                            <span id="profileUsername">
+                            </span>
+                        </p>
+
+
+                        <p>
+                            <strong>Email:</strong>
+
+                            <span id="profileEmail">
+                            </span>
+                        </p>
+
+
+                        <p>
+                            <strong>Phone:</strong>
+
+                            <span id="profilePhone">
+                            </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- ENQUIRY MODAL -->
+
+    <div
+        id="enquiryModal"
+        class="modal">
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="closeEnquiry()">
+
+                &times;
+
+            </span>
+
+
+            <h2>
+                Send Enquiry
+            </h2>
+
+
+            <p id="selectedCar">
+            </p>
+
+
+            <form id="enquiryForm">
+
+                <input
+                    type="hidden"
+                    id="enquiryCarId"
+                >
+
+
+                <textarea
+                    id="enquiryMessage"
+                    placeholder="Enter your message..."
+                    required>
+                </textarea>
+
+
+                <button
+                    type="submit">
+
+                    Submit Enquiry
+
+                </button>
+
+            </form>
+
+
+            <p id="enquiryResult"></p>
+
+        </div>
+
+    </div>
+
+
+    <script src="customer-dashboard.js"></script>
+
+</body>
+
+</html>
